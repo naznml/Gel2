@@ -1,1 +1,1593 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <title>Unit 2 — Білім және ғылым</title>
+
+  <style>
+    :root {
+      --bg: #f5f7ff;
+      --card: #ffffff;
+      --text: #171827;
+      --muted: #64748b;
+      --primary: #2563eb;
+      --primary-2: #7c3aed;
+      --accent: #06b6d4;
+      --soft: #eef4ff;
+      --soft-2: #f8fafc;
+      --border: #e5e7eb;
+      --green: #10b981;
+      --red: #ef4444;
+      --shadow: 0 20px 55px rgba(15, 23, 42, 0.10);
+      --radius: 26px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(37, 99, 235, 0.17), transparent 34%),
+        radial-gradient(circle at 90% 8%, rgba(124, 58, 237, 0.15), transparent 30%),
+        radial-gradient(circle at 50% 100%, rgba(6, 182, 212, 0.11), transparent 34%),
+        var(--bg);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 16px 0 80px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 10px;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: 10px;
+      margin-bottom: 18px;
+      border: 1px solid rgba(229, 231, 235, 0.85);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-left: 8px;
+      color: var(--primary);
+      font-weight: 950;
+      font-size: 14px;
+    }
+
+    .brand-dot {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.12);
+      flex-shrink: 0;
+    }
+
+    .lang-switch {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .lang-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 9px 15px;
+      background: var(--soft);
+      color: var(--primary);
+      font-weight: 950;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .lang-btn.active {
+      color: white;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.25);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 46px 34px;
+      border-radius: 36px;
+      color: white;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      box-shadow: var(--shadow);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -90px;
+      top: -90px;
+      width: 310px;
+      height: 310px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      left: 38px;
+      bottom: -120px;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      background: rgba(6, 182, 212, 0.20);
+    }
+
+    .hero-badge {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      padding: 8px 14px;
+      margin-bottom: 18px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.17);
+      font-size: 14px;
+      font-weight: 850;
+    }
+
+    .hero h1 {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      max-width: 850px;
+      font-size: clamp(34px, 5vw, 62px);
+      line-height: 1.04;
+      letter-spacing: -1.6px;
+    }
+
+    .hero .english-title {
+      position: relative;
+      z-index: 1;
+      margin-top: 12px;
+      font-size: clamp(15px, 2vw, 19px);
+      opacity: 0.9;
+      text-transform: lowercase;
+    }
+
+    .hero p {
+      position: relative;
+      z-index: 1;
+      max-width: 820px;
+      margin: 22px 0 0;
+      font-size: 17px;
+      opacity: 0.94;
+    }
+
+    .section {
+      margin-top: 26px;
+      padding: 28px;
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(229, 231, 235, 0.9);
+      box-shadow: var(--shadow);
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .eyebrow {
+      margin-bottom: 7px;
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    h2, h3, h4 {
+      margin: 0;
+      line-height: 1.2;
+      letter-spacing: -0.45px;
+    }
+
+    h2 {
+      font-size: clamp(24px, 3vw, 34px);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .subunit-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .subunit-card {
+      min-height: 165px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: linear-gradient(180deg, #ffffff, #f8fbff);
+      transition: 0.2s ease;
+    }
+
+    .subunit-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(37, 99, 235, 0.45);
+      box-shadow: 0 16px 38px rgba(37, 99, 235, 0.13);
+    }
+
+    .subunit-number {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: var(--soft);
+      color: var(--primary);
+      font-weight: 950;
+    }
+
+    .subunit-card strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .subunit-card span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .subunit-block {
+      scroll-margin-top: 96px;
+      margin-top: 28px;
+      padding: 28px;
+      border-radius: 30px;
+      background: white;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .subunit-header {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 18px;
+      align-items: start;
+      margin-bottom: 24px;
+    }
+
+    .big-number {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border-radius: 21px;
+      color: white;
+      font-size: 20px;
+      font-weight: 950;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      box-shadow: 0 16px 32px rgba(37, 99, 235, 0.25);
+    }
+
+    .subunit-title-en {
+      font-size: clamp(25px, 3.2vw, 40px);
+      font-weight: 950;
+      line-height: 1.08;
+      letter-spacing: -1px;
+    }
+
+    .subunit-title-local {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 17px;
+      font-weight: 750;
+    }
+
+    .listening-card {
+      margin-top: 22px;
+      padding: 26px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background: #ffffff;
+      box-shadow: 0 14px 35px rgba(15, 23, 42, 0.06);
+    }
+
+    .listening-title {
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 950;
+      line-height: 1.15;
+      letter-spacing: -0.8px;
+      margin-bottom: 18px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 11px 16px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--primary);
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .audio-box {
+      padding: 16px;
+      margin-bottom: 22px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: #f8fbff;
+    }
+
+    audio {
+      width: 100%;
+      display: block;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 14px;
+    }
+
+    .tab-btn {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 13px 20px;
+      background: white;
+      color: var(--muted);
+      font-weight: 950;
+      cursor: pointer;
+      transition: 0.2s ease;
+      font-size: 15px;
+    }
+
+    .tab-btn.active {
+      border-color: transparent;
+      color: white;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.22);
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    .instruction {
+      margin-bottom: 18px;
+      padding: 16px 18px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: #fbfcff;
+      color: var(--muted);
+    }
+
+    .question {
+      margin-bottom: 14px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: white;
+    }
+
+    .question-title {
+      margin-bottom: 12px;
+      font-weight: 950;
+    }
+
+    .options {
+      display: grid;
+      gap: 9px;
+    }
+
+    .option {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 11px 12px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: #fbfcff;
+      cursor: pointer;
+      transition: 0.18s ease;
+    }
+
+    .option:hover {
+      border-color: rgba(37, 99, 235, 0.45);
+      background: #f8fbff;
+    }
+
+    .option input {
+      margin-top: 4px;
+      accent-color: var(--primary);
+    }
+
+    .option.correct {
+      border-color: rgba(16, 185, 129, 0.65);
+      background: #ecfdf5;
+    }
+
+    .option.wrong {
+      border-color: rgba(239, 68, 68, 0.65);
+      background: #fef2f2;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .check-btn {
+      border: none;
+      border-radius: 16px;
+      padding: 13px 20px;
+      color: white;
+      font-weight: 950;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      cursor: pointer;
+      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.24);
+      transition: 0.2s ease;
+    }
+
+    .check-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .result-box {
+      display: none;
+      padding: 13px 16px;
+      border-radius: 16px;
+      background: #ecfdf5;
+      color: #047857;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      font-weight: 950;
+    }
+
+    .text-box {
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: #fbfcff;
+      white-space: pre-line;
+      font-size: 15.5px;
+    }
+
+    .line-translation {
+      display: grid;
+      gap: 10px;
+    }
+
+    .line-item {
+      padding: 13px 14px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #fbfcff;
+    }
+
+    .line-item strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .line-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .vocab-list {
+      display: grid;
+      gap: 10px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .vocab-list li {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: #fbfcff;
+      border: 1px solid var(--border);
+    }
+
+    .answer-panel {
+      display: none;
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      background: #ecfdf5;
+    }
+
+    .answer-panel h4 {
+      margin-bottom: 12px;
+      color: #047857;
+    }
+
+    .answer-item {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: white;
+      border: 1px solid var(--border);
+      margin-bottom: 10px;
+    }
+
+    .answer-item strong {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .answer-item small {
+      display: block;
+      color: var(--muted);
+      font-size: 12.5px;
+      margin-bottom: 8px;
+    }
+
+    .answer-item p {
+      margin: 4px 0;
+      font-size: 14px;
+    }
+
+    @media (max-width: 960px) {
+      .subunit-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .section-head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        width: min(100% - 18px, 1180px);
+        padding-top: 10px;
+      }
+
+      .topbar {
+        top: 6px;
+        border-radius: 22px;
+        align-items: stretch;
+      }
+
+      .brand {
+        font-size: 12px;
+      }
+
+      .lang-btn {
+        padding: 8px 12px;
+      }
+
+      .hero {
+        padding: 32px 22px;
+        border-radius: 27px;
+      }
+
+      .section,
+      .subunit-block {
+        padding: 20px;
+        border-radius: 24px;
+      }
+
+      .subunit-grid {
+        display: flex;
+        overflow-x: auto;
+        gap: 12px;
+        padding-bottom: 4px;
+        scroll-snap-type: x mandatory;
+      }
+
+      .subunit-card {
+        min-width: 245px;
+        min-height: 150px;
+        scroll-snap-align: start;
+      }
+
+      .subunit-header {
+        grid-template-columns: 1fr;
+      }
+
+      .big-number {
+        width: 50px;
+        height: 50px;
+        border-radius: 18px;
+      }
+
+      .listening-card {
+        padding: 18px;
+        border-radius: 24px;
+      }
+
+      .chips {
+        gap: 8px;
+      }
+
+      .chip {
+        font-size: 13px;
+        padding: 9px 12px;
+      }
+
+      .audio-box {
+        padding: 14px;
+      }
+
+      .tabs {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 12px;
+      }
+
+      .tab-btn {
+        white-space: nowrap;
+        padding: 11px 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <span>General English Listening Practice</span>
+      </div>
+
+      <div class="lang-switch" aria-label="Language switcher">
+        <button class="lang-btn active" type="button" data-lang="kk">KZ</button>
+        <button class="lang-btn" type="button" data-lang="ru">RU</button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-badge" data-kk="Unit 2 · Listening бөлімі" data-ru="Unit 2 · Раздел Listening">
+        Unit 2 · Listening бөлімі
+      </div>
+
+      <h1
+        data-kk="Білім және ғылым"
+        data-ru="Образование и наука"
+      >
+        Білім және ғылым
+      </h1>
+
+      <div class="english-title">education and science</div>
+
+      <p
+        data-kk="Бұл сайт магистратураға түсу емтиханындағы General English Listening бөліміне дайындалуға арналған. Тапсырмалар ағылшын тілінде беріледі, ал түсіндірме, аударма және нәтиже KZ/RU режиміне қарай өзгереді."
+        data-ru="Этот сайт предназначен для подготовки к разделу General English Listening вступительного экзамена в магистратуру. Задания даются на английском языке, а объяснения, перевод и результат меняются в режиме KZ/RU."
+      >
+        Бұл сайт магистратураға түсу емтиханындағы General English Listening бөліміне дайындалуға арналған. Тапсырмалар ағылшын тілінде беріледі, ал түсіндірме, аударма және нәтиже KZ/RU режиміне қарай өзгереді.
+      </p>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow" data-kk="Unit ішіндегі бөлімдер" data-ru="Разделы внутри Unit">
+            Unit ішіндегі бөлімдер
+          </div>
+
+          <h2 data-kk="Осы сайттағы 5 sub-unit" data-ru="5 sub-units на этом сайте">
+            Осы сайттағы 5 sub-unit
+          </h2>
+        </div>
+
+        <p
+          class="muted"
+          data-kk="Қажетті sub-unit карточкасын бассаңыз, сайт сол бөлімге бірден өтеді."
+          data-ru="Нажмите на нужную карточку sub-unit, и сайт сразу перейдёт к этому разделу."
+        >
+          Қажетті sub-unit карточкасын бассаңыз, сайт сол бөлімге бірден өтеді.
+        </p>
+      </div>
+
+      <div class="subunit-grid">
+        <a class="subunit-card" href="#subunit-1">
+          <div class="subunit-number">01</div>
+          <div>
+            <strong>University and student life</strong>
+            <span
+              data-kk="Университет және студенттік өмір"
+              data-ru="Университет и студенческая жизнь"
+            >
+              Университет және студенттік өмір
+            </span>
+          </div>
+        </a>
+
+        <a class="subunit-card" href="#subunit-2">
+          <div class="subunit-number">02</div>
+          <div>
+            <strong>Scientific work and discoveries</strong>
+            <span
+              data-kk="Ғылыми жұмыс және жаңалық ашу"
+              data-ru="Научная работа и открытия"
+            >
+              Ғылыми жұмыс және жаңалық ашу
+            </span>
+          </div>
+        </a>
+
+        <a class="subunit-card" href="#subunit-3">
+          <div class="subunit-number">03</div>
+          <div>
+            <strong>Science news and youth policy</strong>
+            <span
+              data-kk="Ғылым жаңалықтары және жастар саясаты"
+              data-ru="Новости науки и молодёжная политика"
+            >
+              Ғылым жаңалықтары және жастар саясаты
+            </span>
+          </div>
+        </a>
+
+        <a class="subunit-card" href="#subunit-4">
+          <div class="subunit-number">04</div>
+          <div>
+            <strong>Famous scientists and researchers</strong>
+            <span
+              data-kk="Әлемдік ғалымдар мен зерттеушілер"
+              data-ru="Известные учёные и исследователи"
+            >
+              Әлемдік ғалымдар мен зерттеушілер
+            </span>
+          </div>
+        </a>
+
+        <a class="subunit-card" href="#subunit-5">
+          <div class="subunit-number">05</div>
+          <div>
+            <strong>Ecology, technology and global issues</strong>
+            <span
+              data-kk="Экология, техникалық прогресс және жаһандық мәселелер"
+              data-ru="Экология, технический прогресс и глобальные проблемы"
+            >
+              Экология, техникалық прогресс және жаһандық мәселелер
+            </span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="subunit-block" id="subunit-1">
+      <div class="subunit-header">
+        <div class="big-number">01</div>
+
+        <div>
+          <div class="eyebrow">Sub-unit 1</div>
+          <div class="subunit-title-en">University and student life</div>
+          <div
+            class="subunit-title-local"
+            data-kk="Университет және студенттік өмір"
+            data-ru="Университет и студенческая жизнь"
+          >
+            Университет және студенттік өмір
+          </div>
+        </div>
+      </div>
+
+      <article class="listening-card" id="audio-1">
+        <div class="listening-title">Listening 2.1.1 — Instructions for an assignment</div>
+
+        <div class="chips">
+          <div class="chip">Topic: University life / Study tasks</div>
+          <div class="chip">Type: Monologue</div>
+        </div>
+
+        <div class="audio-box">
+          <audio controls preload="metadata">
+            <source src="1.m4a">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+
+        <div class="tabs">
+          <button class="tab-btn active" type="button" onclick="openTab('audio1', 'test')">Test</button>
+          <button class="tab-btn" type="button" onclick="openTab('audio1', 'transcript')">Transcript</button>
+          <button class="tab-btn" type="button" onclick="openTab('audio1', 'translation')" data-kk="Аударма" data-ru="Перевод">Аударма</button>
+          <button class="tab-btn" type="button" onclick="openTab('audio1', 'vocabulary')">Vocabulary</button>
+        </div>
+
+        <div class="tab-panel active" data-tab-group="audio1" data-tab-name="test">
+          <div
+            class="instruction"
+            data-kk="Аудионы тыңдап, 8 сұраққа жауап беріңіз. Сұрақтар мен жауап нұсқалары ағылшын тілінде берілген."
+            data-ru="Прослушайте аудио и ответьте на 8 вопросов. Вопросы и варианты ответов даны на английском языке."
+          >
+            Аудионы тыңдап, 8 сұраққа жауап беріңіз. Сұрақтар мен жауап нұсқалары ағылшын тілінде берілген.
+          </div>
+
+          <div class="test-area" data-test="audio1">
+            <div class="question" data-correct="C">
+              <div class="question-title">1. What will happen if the essay is late?</div>
+              <div class="options">
+                <label class="option"><input type="radio" name="u2a1q1" value="A"> A. The student will get two extra days</label>
+                <label class="option"><input type="radio" name="u2a1q1" value="B"> B. The teacher will mark it, but give a lower grade</label>
+                <label class="option"><input type="radio" name="u2a1q1" value="C"> C. The teacher will not mark it and the student will fail</label>
+                <label class="option"><input type="radio" name="u2a1q1" value="D"> D. The student will need to print another copy</label>
+              </div>
+            </div>
+
+            <div class="question" data-correct="A">
+              <div class="question-title">2. What is the correct deadline for the essay?</div>
+              <div class="options">
+                <label class="option"><input type="radio" name="u2a1q2" value="A"> A. October 18th</label>
+                <label class="option"><input type="radio" name="u2a1q2" value="B"> B. October 19th</label>
+                <label class="option"><input type="radio" name="u2a1q2" value="C"> C. October 28th</label>
+                <label class="option"><input type="radio" name="u2a1q2" value="D"> D. Two days after the original deadline</label>
+              </div>
+            </div>
+
+            <div class="question" data-correct="D">
+              <div class="question-title">3. What should students do if the teacher does not reply within a day?</div>
+              <div class="options">
+                <label class="option"><input type="radio" name="u2a1q3" value="A"> A. Bring only a paper copy to the office</label>
+                <label class="option"><input type="radio" name="u2a1q3" value="B"> B. Wait until the deadline passes</label>
+                <label class="option"><input type="radio" name="u2a1q3" value="C"> C. Change the email address and send it later</label>
+                <label class="option"><input type="radio" name="u2a1q3" value="D"> D. Email the teacher again to make sure</label>
+              </div>
+            </div>
+
+            <div class="question" data-correct="B">
+              <div class="question-title">4. What should the last page of the essay contain?</div>
+              <div class="options">
+                <label class="option"><input type="radio" name="u2a1q4" value="A"> A. A list of ideas in the order they appear</label>
+                <label class="option"><input type="radio" name="u2a1q4" value="B"> B. A list of all books used, in alphabetical order</label>
+                <label class="option"><input type="radio" name="u2a1q4" value="C"> C. A copy of the teacher’s email address</label>
+                <label class="option"><input type="radio" name="u2a1q4" value="D"> D. A summary of the essay and page numbers</label>
+              </div>
+            </div>
+
+            <div class="question" data-correct="A">
+              <div class="question-title">5. Which font does the teacher say is best?</div>
+              <div class="options">
+                <label class="option"><input type="radio" name="u2a1q5" value="A"> A. Arial</label>
+                <label class="option"><input type="radio" name="u2a1q5" value="B"> B. Times New Roman</label>
+                <label class="option"><input type="radio" name="u2a1q5" value="C"> C. Comic Sans</label>
+                <label class="option"><input type="radio" name="u2a1q5" value="D"> D. Any clear font larger than 14</label>
+              </div>
+            </div>
+
+            <div class="question" data-correct="C">
+              <div class="question-title">6. What font size should be used for titles and subheadings?</div>
+              <div class="options">
+                <label class="option"><input type="radio" name="u2a1q6" value="A"> A. Size 10</label>
+                <label class="option"><input type="radio" name="u2a1q6" value="B"> B. Size 12</label>
+                <label class="option"><input type="radio" name="u2a1q6" value="C"> C. Size 14</label>
+                <label class="option"><input type="radio" name="u2a1q6" value="D"> D. Size 18</label>
+              </div>
+            </div>
+
+            <div class="question" data-correct="D">
+              <div class="question-title">7. Why does the teacher prefer email submission?</div>
+              <div class="options">
+                <label class="option"><input type="radio" name="u2a1q7" value="A"> A. It is the only form the university accepts</label>
+                <label class="option"><input type="radio" name="u2a1q7" value="B"> B. It makes the essay easier to reference</label>
+                <label class="option"><input type="radio" name="u2a1q7" value="C"> C. It allows students to use Comic Sans</label>
+                <label class="option"><input type="radio" name="u2a1q7" value="D"> D. It is better for the trees and for the teacher</label>
+              </div>
+            </div>
+
+            <div class="question" data-correct="B">
+              <div class="question-title">8. What must students reference in the essay?</div>
+              <div class="options">
+                <label class="option"><input type="radio" name="u2a1q8" value="A"> A. Only long quotations from books</label>
+                <label class="option"><input type="radio" name="u2a1q8" value="B"> B. Every idea or quote that is not their own</label>
+                <label class="option"><input type="radio" name="u2a1q8" value="C"> C. Only ideas from online articles</label>
+                <label class="option"><input type="radio" name="u2a1q8" value="D"> D. The teacher’s email and office number</label>
+              </div>
+            </div>
+
+            <div class="actions">
+              <button class="check-btn" type="button" onclick="checkTest('audio1')" data-kk="Show result" data-ru="Show result">Show result</button>
+              <div class="result-box" id="result-audio1"></div>
+            </div>
+          </div>
+
+          <div class="answer-panel" id="answers-audio1">
+            <h4 data-kk="Нәтиже және жауаптар" data-ru="Результат и ответы">Нәтиже және жауаптар</h4>
+
+            <div class="answer-item">
+              <strong>1. What will happen if the essay is late?</strong>
+              <small data-kk="Егер эссе кеш тапсырылса, не болады?" data-ru="Что произойдёт, если эссе сдадут поздно?">Егер эссе кеш тапсырылса, не болады?</small>
+              <p><b>Correct answer: C</b></p>
+              <p><b>Answer:</b> The teacher will not mark it and the student will fail.</p>
+              <p><b data-kk="Жауап аудармасы:" data-ru="Перевод ответа:">Жауап аудармасы:</b> <span data-kk="Оқытушы оны тексермейді, студент тапсырмадан құлайды." data-ru="Преподаватель не будет его проверять, и студент провалит задание.">Оқытушы оны тексермейді, студент тапсырмадан құлайды.</span></p>
+              <p><b data-kk="Неге:" data-ru="Почему:">Неге:</b> <span data-kk="Оқытушы late болса, оны оқымайтынын және студент fail болатынын айтады." data-ru="Преподаватель говорит, что если работа late, он её не прочитает, и студент fail.">Оқытушы late болса, оны оқымайтынын және студент fail болатынын айтады.</span></p>
+            </div>
+
+            <div class="answer-item">
+              <strong>2. What is the correct deadline for the essay?</strong>
+              <small data-kk="Эссенің нақты deadline күні қай күн?" data-ru="Какой точный дедлайн для эссе?">Эссенің нақты deadline күні қай күн?</small>
+              <p><b>Correct answer: A</b></p>
+              <p><b>Answer:</b> October 18th.</p>
+              <p><b data-kk="Жауап аудармасы:" data-ru="Перевод ответа:">Жауап аудармасы:</b> <span data-kk="18 қазан." data-ru="18 октября.">18 қазан.</span></p>
+              <p><b data-kk="Неге:" data-ru="Почему:">Неге:</b> <span data-kk="Оқытушы 18 қазан екенін бірнеше рет нақтылайды." data-ru="Преподаватель несколько раз подчёркивает, что это 18 октября.">Оқытушы 18 қазан екенін бірнеше рет нақтылайды.</span></p>
+            </div>
+
+            <div class="answer-item">
+              <strong>3. What should students do if the teacher does not reply within a day?</strong>
+              <small data-kk="Оқытушы бір күн ішінде жауап бермесе, студенттер не істеуі керек?" data-ru="Что должны сделать студенты, если преподаватель не ответит в течение дня?">Оқытушы бір күн ішінде жауап бермесе, студенттер не істеуі керек?</small>
+              <p><b>Correct answer: D</b></p>
+              <p><b>Answer:</b> Email the teacher again to make sure.</p>
+              <p><b data-kk="Жауап аудармасы:" data-ru="Перевод ответа:">Жауап аудармасы:</b> <span data-kk="Нақтылау үшін оқытушыға қайта email жіберу." data-ru="Отправить преподавателю email ещё раз, чтобы убедиться.">Нақтылау үшін оқытушыға қайта email жіберу.</span></p>
+              <p><b data-kk="Неге:" data-ru="Почему:">Неге:</b> <span data-kk="Оқытушы reply болмаса, essay жетпеген болуы мүмкін дейді." data-ru="Преподаватель говорит, что если reply нет, essay мог не дойти.">Оқытушы reply болмаса, essay жетпеген болуы мүмкін дейді.</span></p>
+            </div>
+
+            <div class="answer-item">
+              <strong>4. What should the last page of the essay contain?</strong>
+              <small data-kk="Эссенің соңғы бетінде не болуы керек?" data-ru="Что должно быть на последней странице эссе?">Эссенің соңғы бетінде не болуы керек?</small>
+              <p><b>Correct answer: B</b></p>
+              <p><b>Answer:</b> A list of all books used, in alphabetical order.</p>
+              <p><b data-kk="Жауап аудармасы:" data-ru="Перевод ответа:">Жауап аудармасы:</b> <span data-kk="Қолданылған барлық кітаптардың алфавит бойынша тізімі." data-ru="Список всех использованных книг в алфавитном порядке.">Қолданылған барлық кітаптардың алфавит бойынша тізімі.</span></p>
+              <p><b data-kk="Неге:" data-ru="Почему:">Неге:</b> <span data-kk="Оқытушы last page books list alphabetical order болуы керек дейді." data-ru="Преподаватель говорит, что last page должен быть books list in alphabetical order.">Оқытушы last page books list alphabetical order болуы керек дейді.</span></p>
+            </div>
+
+            <div class="answer-item">
+              <strong>5. Which font does the teacher say is best?</strong>
+              <small data-kk="Оқытушы қай font ең жақсы дейді?" data-ru="Какой шрифт преподаватель считает лучшим?">Оқытушы қай font ең жақсы дейді?</small>
+              <p><b>Correct answer: A</b></p>
+              <p><b>Answer:</b> Arial.</p>
+              <p><b data-kk="Жауап аудармасы:" data-ru="Перевод ответа:">Жауап аудармасы:</b> <span data-kk="Arial." data-ru="Arial.">Arial.</span></p>
+              <p><b data-kk="Неге:" data-ru="Почему:">Неге:</b> <span data-kk="Оқытушы “Arial is best” дейді." data-ru="Преподаватель говорит: “Arial is best”.">Оқытушы “Arial is best” дейді.</span></p>
+            </div>
+
+            <div class="answer-item">
+              <strong>6. What font size should be used for titles and subheadings?</strong>
+              <small data-kk="Тақырыптар мен subheadings үшін қандай font size қолдану керек?" data-ru="Какой размер шрифта нужен для заголовков и подзаголовков?">Тақырыптар мен subheadings үшін қандай font size қолдану керек?</small>
+              <p><b>Correct answer: C</b></p>
+              <p><b>Answer:</b> Size 14.</p>
+              <p><b data-kk="Жауап аудармасы:" data-ru="Перевод ответа:">Жауап аудармасы:</b> <span data-kk="14 өлшем." data-ru="Размер 14.">14 өлшем.</span></p>
+              <p><b data-kk="Неге:" data-ru="Почему:">Неге:</b> <span data-kk="Оқытушы essay үшін 12, titles және subheadings үшін 14 дейді." data-ru="Преподаватель говорит: 12 для essay, 14 для titles and subheadings.">Оқытушы essay үшін 12, titles және subheadings үшін 14 дейді.</span></p>
+            </div>
+
+            <div class="answer-item">
+              <strong>7. Why does the teacher prefer email submission?</strong>
+              <small data-kk="Оқытушы неге email арқылы тапсыруды қалайды?" data-ru="Почему преподаватель предпочитает сдачу по email?">Оқытушы неге email арқылы тапсыруды қалайды?</small>
+              <p><b>Correct answer: D</b></p>
+              <p><b>Answer:</b> It is better for the trees and for the teacher.</p>
+              <p><b data-kk="Жауап аудармасы:" data-ru="Перевод ответа:">Жауап аудармасы:</b> <span data-kk="Бұл ағаштар үшін де, оқытушы үшін де жақсы." data-ru="Это лучше и для деревьев, и для преподавателя.">Бұл ағаштар үшін де, оқытушы үшін де жақсы.</span></p>
+              <p><b data-kk="Неге:" data-ru="Почему:">Неге:</b> <span data-kk="Оқытушы paper copy орнына email better for trees and for me дейді." data-ru="Преподаватель говорит, что email лучше, чем paper copy: better for trees and for me.">Оқытушы paper copy орнына email better for trees and for me дейді.</span></p>
+            </div>
+
+            <div class="answer-item">
+              <strong>8. What must students reference in the essay?</strong>
+              <small data-kk="Студенттер эсседе нені reference етуі керек?" data-ru="Что студенты должны указывать в ссылках в эссе?">Студенттер эсседе нені reference етуі керек?</small>
+              <p><b>Correct answer: B</b></p>
+              <p><b>Answer:</b> Every idea or quote that is not their own.</p>
+              <p><b data-kk="Жауап аудармасы:" data-ru="Перевод ответа:">Жауап аудармасы:</b> <span data-kk="Өзінікі емес әр идеяны немесе quote-ты." data-ru="Каждую идею или цитату, которая не принадлежит им.">Өзінікі емес әр идеяны немесе quote-ты.</span></p>
+              <p><b data-kk="Неге:" data-ru="Почему:">Неге:</b> <span data-kk="Оқытушы өз idea емес барлық idea немесе quote reference болуы керек дейді." data-ru="Преподаватель говорит, что every idea or quote that isn't your own must be referenced.">Оқытушы өз idea емес барлық idea немесе quote reference болуы керек дейді.</span></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-panel" data-tab-group="audio1" data-tab-name="transcript">
+          <div class="text-box">I want to explain a few things about your essay.
+First of all, the deadline.
+The deadline for this essay is October the 18th.
+Not the 19th, not the 28th, not two days later because your dog was ill or your computer broke – the 18th.
+If it's late, I won't mark it.
+I won't even read it – you'll fail the assignment!
+So, please hand it in on time.
+You can even hand it in early, if you like!
+You can email me the essays at j.hartshorn@lmu.ac.uk.
+That's H-A-R-T-S-H-O-R-N.
+I'll reply to say I've got it.
+If I don't reply within a day, it might mean I didn't get it, so please email me again to make sure.
+You can also bring a paper copy of the essay to my office, but let's be kind to the trees, OK?
+Email is better for the trees and for me.
+Don't forget that you must reference every idea or quote you use that isn't your own idea.
+And the last page of your essay should be a list of all the books you used, in alphabetical order, not in the order you used them!
+And lastly, make it easy for me to read!
+That means use a clear font.
+Arial is best, but Times New Roman is fine too.
+Not Comic Sans please!
+Size 12 font for the essay, and size 14 for the titles and subheadings.
+And use page numbers.
+Any questions?</div>
+        </div>
+
+        <div class="tab-panel" data-tab-group="audio1" data-tab-name="translation">
+          <div class="line-translation">
+            <div class="line-item">
+              <strong>I want to explain a few things about your essay.</strong>
+              <span data-kk="Мен эсселеріңіз туралы бірнеше нәрсені түсіндіргім келеді." data-ru="Я хочу объяснить несколько вещей о вашем эссе.">Мен эсселеріңіз туралы бірнеше нәрсені түсіндіргім келеді.</span>
+            </div>
+            <div class="line-item">
+              <strong>First of all, the deadline.</strong>
+              <span data-kk="Ең алдымен, deadline туралы." data-ru="Прежде всего, о дедлайне.">Ең алдымен, deadline туралы.</span>
+            </div>
+            <div class="line-item">
+              <strong>The deadline for this essay is October the 18th.</strong>
+              <span data-kk="Бұл эссенің deadline күні — 18 қазан." data-ru="Дедлайн этого эссе — 18 октября.">Бұл эссенің deadline күні — 18 қазан.</span>
+            </div>
+            <div class="line-item">
+              <strong>Not the 19th, not the 28th, not two days later because your dog was ill or your computer broke – the 18th.</strong>
+              <span data-kk="19-ы емес, 28-і емес, итіңіз ауырып қалды немесе компьютеріңіз бұзылды деп екі күн кейін де емес — 18-і." data-ru="Не 19-е, не 28-е, и не на два дня позже из-за больной собаки или сломанного компьютера — 18-е.">19-ы емес, 28-і емес, итіңіз ауырып қалды немесе компьютеріңіз бұзылды деп екі күн кейін де емес — 18-і.</span>
+            </div>
+            <div class="line-item">
+              <strong>If it's late, I won't mark it.</strong>
+              <span data-kk="Егер кеш тапсырылса, мен оны тексермеймін." data-ru="Если работа будет сдана поздно, я не буду её проверять.">Егер кеш тапсырылса, мен оны тексермеймін.</span>
+            </div>
+            <div class="line-item">
+              <strong>I won't even read it – you'll fail the assignment!</strong>
+              <span data-kk="Мен оны тіпті оқымаймын — сіз тапсырмадан құлайсыз!" data-ru="Я даже не буду её читать — вы провалите задание!">Мен оны тіпті оқымаймын — сіз тапсырмадан құлайсыз!</span>
+            </div>
+            <div class="line-item">
+              <strong>So, please hand it in on time.</strong>
+              <span data-kk="Сондықтан оны уақытында тапсырыңыз." data-ru="Поэтому, пожалуйста, сдайте его вовремя.">Сондықтан оны уақытында тапсырыңыз.</span>
+            </div>
+            <div class="line-item">
+              <strong>You can even hand it in early, if you like!</strong>
+              <span data-kk="Қаласаңыз, тіпті ертерек тапсыруға болады." data-ru="Вы даже можете сдать его раньше, если хотите.">Қаласаңыз, тіпті ертерек тапсыруға болады.</span>
+            </div>
+            <div class="line-item">
+              <strong>You can email me the essays at j.hartshorn@lmu.ac.uk.</strong>
+              <span data-kk="Эссені маған j.hartshorn@lmu.ac.uk мекенжайына email арқылы жібере аласыз." data-ru="Вы можете отправить эссе мне на email j.hartshorn@lmu.ac.uk.">Эссені маған j.hartshorn@lmu.ac.uk мекенжайына email арқылы жібере аласыз.</span>
+            </div>
+            <div class="line-item">
+              <strong>That's H-A-R-T-S-H-O-R-N.</strong>
+              <span data-kk="Ол H-A-R-T-S-H-O-R-N деп жазылады." data-ru="Это пишется H-A-R-T-S-H-O-R-N.">Ол H-A-R-T-S-H-O-R-N деп жазылады.</span>
+            </div>
+            <div class="line-item">
+              <strong>I'll reply to say I've got it.</strong>
+              <span data-kk="Мен оны алғанымды айту үшін жауап беремін." data-ru="Я отвечу, чтобы подтвердить, что получил его.">Мен оны алғанымды айту үшін жауап беремін.</span>
+            </div>
+            <div class="line-item">
+              <strong>If I don't reply within a day, it might mean I didn't get it, so please email me again to make sure.</strong>
+              <span data-kk="Егер бір күн ішінде жауап бермесем, бұл мен оны алмағанымды білдіруі мүмкін, сондықтан нақтылау үшін қайта email жіберіңіз." data-ru="Если я не отвечу в течение дня, это может означать, что я его не получил, поэтому отправьте email ещё раз, чтобы убедиться.">Егер бір күн ішінде жауап бермесем, бұл мен оны алмағанымды білдіруі мүмкін, сондықтан нақтылау үшін қайта email жіберіңіз.</span>
+            </div>
+            <div class="line-item">
+              <strong>You can also bring a paper copy of the essay to my office, but let's be kind to the trees, OK?</strong>
+              <span data-kk="Эссенің қағаз көшірмесін кеңсеме әкелуге де болады, бірақ ағаштарға жанашыр болайық, жарай ма?" data-ru="Вы также можете принести бумажную копию эссе в мой офис, но давайте будем бережны к деревьям, хорошо?">Эссенің қағаз көшірмесін кеңсеме әкелуге де болады, бірақ ағаштарға жанашыр болайық, жарай ма?</span>
+            </div>
+            <div class="line-item">
+              <strong>Email is better for the trees and for me.</strong>
+              <span data-kk="Email ағаштар үшін де, мен үшін де жақсы." data-ru="Email лучше и для деревьев, и для меня.">Email ағаштар үшін де, мен үшін де жақсы.</span>
+            </div>
+            <div class="line-item">
+              <strong>Don't forget that you must reference every idea or quote you use that isn't your own idea.</strong>
+              <span data-kk="Өз ойыңыз емес әр идеяны немесе quote-ты міндетті түрде reference ету керек екенін ұмытпаңыз." data-ru="Не забывайте, что нужно указывать ссылку на каждую идею или цитату, которая не является вашей собственной.">Өз ойыңыз емес әр идеяны немесе quote-ты міндетті түрде reference ету керек екенін ұмытпаңыз.</span>
+            </div>
+            <div class="line-item">
+              <strong>And the last page of your essay should be a list of all the books you used, in alphabetical order, not in the order you used them!</strong>
+              <span data-kk="Эссенің соңғы бетінде қолданған барлық кітаптардың тізімі алфавит бойынша берілуі керек, қолданған ретіңіз бойынша емес." data-ru="На последней странице эссе должен быть список всех использованных книг в алфавитном порядке, а не в порядке использования.">Эссенің соңғы бетінде қолданған барлық кітаптардың тізімі алфавит бойынша берілуі керек, қолданған ретіңіз бойынша емес.</span>
+            </div>
+            <div class="line-item">
+              <strong>And lastly, make it easy for me to read!</strong>
+              <span data-kk="Соңында, оны маған оқуға ыңғайлы етіңіз." data-ru="И наконец, сделайте так, чтобы мне было легко читать.">Соңында, оны маған оқуға ыңғайлы етіңіз.</span>
+            </div>
+            <div class="line-item">
+              <strong>That means use a clear font.</strong>
+              <span data-kk="Бұл анық font қолдану керек дегенді білдіреді." data-ru="Это означает, что нужно использовать понятный шрифт.">Бұл анық font қолдану керек дегенді білдіреді.</span>
+            </div>
+            <div class="line-item">
+              <strong>Arial is best, but Times New Roman is fine too.</strong>
+              <span data-kk="Arial ең жақсы, бірақ Times New Roman да жарайды." data-ru="Arial лучше всего, но Times New Roman тоже подходит.">Arial ең жақсы, бірақ Times New Roman да жарайды.</span>
+            </div>
+            <div class="line-item">
+              <strong>Not Comic Sans please!</strong>
+              <span data-kk="Comic Sans қолданбаңыз, өтінемін." data-ru="Только не Comic Sans, пожалуйста.">Comic Sans қолданбаңыз, өтінемін.</span>
+            </div>
+            <div class="line-item">
+              <strong>Size 12 font for the essay, and size 14 for the titles and subheadings.</strong>
+              <span data-kk="Эссе үшін 12 font size, ал тақырыптар мен subheadings үшін 14 font size қолданыңыз." data-ru="Для эссе используйте размер 12, а для заголовков и подзаголовков — размер 14.">Эссе үшін 12 font size, ал тақырыптар мен subheadings үшін 14 font size қолданыңыз.</span>
+            </div>
+            <div class="line-item">
+              <strong>And use page numbers.</strong>
+              <span data-kk="Және page numbers қолданыңыз." data-ru="И используйте номера страниц.">Және page numbers қолданыңыз.</span>
+            </div>
+            <div class="line-item">
+              <strong>Any questions?</strong>
+              <span data-kk="Сұрақтарыңыз бар ма?" data-ru="Есть вопросы?">Сұрақтарыңыз бар ма?</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-panel" data-tab-group="audio1" data-tab-name="vocabulary">
+          <ul class="vocab-list">
+            <li><strong>assignment</strong> — <span data-kk="тапсырма" data-ru="задание">тапсырма</span></li>
+            <li><strong>deadline</strong> — <span data-kk="соңғы тапсыру күні" data-ru="дедлайн, срок сдачи">соңғы тапсыру күні</span></li>
+            <li><strong>to hand in</strong> — <span data-kk="тапсыру" data-ru="сдать">тапсыру</span></li>
+            <li><strong>to mark</strong> — <span data-kk="тексеру, бағалау" data-ru="проверять, оценивать">тексеру, бағалау</span></li>
+            <li><strong>to fail</strong> — <span data-kk="құлау, өтпей қалу" data-ru="провалить, не сдать">құлау, өтпей қалу</span></li>
+            <li><strong>paper copy</strong> — <span data-kk="қағаз көшірме" data-ru="бумажная копия">қағаз көшірме</span></li>
+            <li><strong>to reference</strong> — <span data-kk="дереккөз көрсету, сілтеме беру" data-ru="указывать источник, ссылаться">дереккөз көрсету, сілтеме беру</span></li>
+            <li><strong>quote</strong> — <span data-kk="дәйексөз" data-ru="цитата">дәйексөз</span></li>
+            <li><strong>alphabetical order</strong> — <span data-kk="алфавиттік рет" data-ru="алфавитный порядок">алфавиттік рет</span></li>
+            <li><strong>subheading</strong> — <span data-kk="ішкі тақырыпша" data-ru="подзаголовок">ішкі тақырыпша</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="listening-card" id="audio-2">
+        <div class="listening-title">Listening 2.1.2 — Missing a class</div>
+
+        <div class="chips">
+          <div class="chip">Topic: Student life / Class and homework</div>
+          <div class="chip">Type: Dialogue</div>
+        </div>
+
+        <div class="audio-box">
+          <audio controls preload="metadata">
+            <source src="Midd.m4a">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+
+        <div class="tabs">
+          <button class="tab-btn active" type="button" onclick="openTab('audio2', 'test')">Test</button>
+          <button class="tab-btn" type="button" onclick="openTab('audio2', 'transcript')">Transcript</button>
+          <button class="tab-btn" type="button" onclick="openTab('audio2', 'translation')" data-kk="Аударма" data-ru="Перевод">Аударма</button>
+          <button class="tab-btn" type="button" onclick="openTab('audio2', 'vocabulary')">Vocabulary</button>
+        </div>
+
+        <div class="tab-panel active" data-tab-group="audio2" data-tab-name="test">
+          <div
+            class="instruction"
+            data-kk="Аудионы тыңдап, 8 сұраққа жауап беріңіз. Сұрақтар аралас ретпен берілген."
+            data-ru="Прослушайте аудио и ответьте на 8 вопросов. Вопросы даны в смешанном порядке."
+          >
+            Аудионы тыңдап, 8 сұраққа жауап беріңіз. Сұрақтар аралас ретпен берілген.
+          </div>
+
+          <div class="test-area" data-test="audio2">
+            <div class="question" data-correct="B">
+              <div class="question-title">1. Why can’t Diana come to class next Wednesday?</div>
+              <div class="options">
+                <label class="option"><input type="radio" name="u2a2q1" value="A"> A. She has a mid-term exam</label>
+                <label class="option"><input type="radio" name="u2a2q1" value="B"> B. She has a doctor’s appointment</label>
+                <label class="option"><input type="radio" name="u2a2q1" value="C"> C. She has to post links online</label>
+                <label class="option"><input type="radio" name="u2a2q1" value="D"> D. She has to bring a certificate to the teacher</label>
+              </div>
+            </div>
+
+            <div class="question" data-correct="D">
+              <div class="question-title">2. Which chapters does Diana need to read?</div>
+              <div class="options">
+                <label class="option"><input type="radio" name="u2a2q2" value="A"> A. Chapters 17, 18 and 19</label>
+                <label class="option"><input type="radio" name="u2a2q2" value="B"> B. Chapters 18, 19 and 20</label>
+                <label class="option"><input type="radio" name="u2a2q2" value="C"> C. Chapters 17 to 20, all of them</label>
+                <label class="option"><input type="radio" name="u2a2q2" value="D"> D. Chapters 17, 19 and 20</label>
+              </div>
+            </div>
+
+            <div class="question" data-correct="A">
+              <div class="question-title">3. Where will the teacher post the links?</div>
+              <div class="options">
+                <label class="option"><input type="radio" name="u2a2q3" value="A"> A. Online in the usual place</label>
+                <label class="option"><input type="radio" name="u2a2q3" value="B"> B. In Diana’s notebook</label>
+                <label class="option"><input type="radio" name="u2a2q3" value="C"> C. On the office door</label>
+                <label class="option"><input type="radio" name="u2a2q3" value="D"> D. In the book after chapter 20</label>
+              </div>
+            </div>
+
+            <div class="question" data-correct="C">
+              <div class="question-title">4. What is the deadline for the work Diana has to do at home?</div>
+              <div class="options">
+                <label class="option"><input type="radio" name="u2a2q4" value="A"> A. Next Wednesday</label>
+                <label class="option"><input type="radio" name="u2a2q4" value="B"> B. Before the mid-term exam</label>
+                <label class="option"><input type="radio" name="u2a2q4" value="C"> C. This Friday</label>
+                <label class="option"><input type="radio" name="u2a2q4" value="D"> D. The following Monday</label>
+              </div>
+            </div>
+
+            <div class="question" data-correct="B">
+              <div class="question-title">5. Why is the teacher giving a practice test?</div>
+              <div class="options">
+                <label class="option"><input type="radio" name="u2a2q5" value="A"> A. To replace the missed class completely</label>
+                <label class="option"><input type="radio" name="u2a2q5" value="B"> B. To help students prepare for the mid-term exam</label>
+                <label class="option"><input type="radio" name="u2a2q5" value="C"> C. To check if Diana has a doctor’s certificate</label>
+                <label class="option"><input type="radio" name="u2a2q5" value="D"> D. To decide which chapters students should read</label>
+              </div>
+            </div>
+
+            <div class="question" data-correct="D">
+              <div class="question-title">6. How will Diana receive the practice test?</div>
+              <div class="options">
+                <label class="option"><input type="radio" name="u2a2q6" value="A"> A. She will collect it from the office</label>
+                <label class="option"><input type="radio" name="u2a2q6" value="B"> B. A classmate will bring it to her</label>
+                <label class="option"><input type="radio" name="u2a2q6" value="C"> C. The teacher will post it with the video links</label>
+                <label class="option"><input type="radio" name="u2a2q6" value="D"> D. The teacher will send it by email</label>
+              </div>
+            </div>
+
+            <div class="question" data-correct="A">
+              <div class="question-title">7. What does the teacher ask Diana to bring to the office?</div>
+              <div class="options">
+                <label class="option"><input type="radio" name="u2a2q7" value="A"> A. A certificate from the doctor</label>
+                <label class="option"><input type="radio" name="u2a2q7" value="B"> B. A printed practice test</label>
+                <label class="option"><input type="radio" name="u2a2q7" value="C"> C. Her notebook with chapter notes</label>
+                <label class="option"><input type="radio" name="u2a2q7" value="D"> D. The articles and the video</label>
+              </div>
+            </div>
+
+            <div class="question" data-correct="C">
+              <div class="question-title">8. What does Diana first misunderstand about the reading?</div>
+              <div class="options">
+                <label class="option"><input type="radio" name="u2a2q8" value="A"> A. She thinks there are no online materials</label>
+                <label class="option"><input type="radio" name="u2a2q8" value="B"> B. She thinks the deadline is next Wednesday</label>
+                <label class="option"><input type="radio" name="u2a2q8" value="C"> C. She thinks she should read chapters 17 to 20</label>
+                <label class="option"><input type="radio" name="u2a2q8" value="D"> D. She thinks the teacher will not send the test</label>
+              </div>
+            </div>
+
+            <div class="actions">
+              <button class="check-btn" type="button" onclick="checkTest('audio2')" data-kk="Show result" data-ru="Show result">Show result</button>
+              <div class="result-box" id="result-audio2"></div>
+            </div>
+          </div>
+
+          <div class="answer-panel" id="answers-audio2">
+            <h4 data-kk="Нәтиже және жауаптар" data-ru="Результат и ответы">Нәтиже және жауаптар</h4>
+
+            <div class="answer-item">
+              <strong>1. Why can’t Diana come to class next Wednesday?</strong>
+              <small data-kk="Диана неге келесі сәрсенбіде сабаққа келе алмайды?" data-ru="Почему Диана не может прийти на занятие в следующую среду?">Диана неге келесі сәрсенбіде сабаққа келе алмайды?</small>
+              <p><b>Correct answer: B</b></p>
+              <p><b>Answer:</b> She has a doctor’s appointment.</p>
+              <p><b data-kk="Жауап аудармасы:" data-ru="Перевод ответа:">Жауап аудармасы:</b> <span data-kk="Оның дәрігерге жазылған уақыты бар." data-ru="У неё запись к врачу.">Оның дәрігерге жазылған уақыты бар.</span></p>
+              <p><b data-kk="Неге:" data-ru="Почему:">Неге:</b> <span data-kk="Диана class-қа келе алмайтынын doctor’s appointment себебімен түсіндіреді." data-ru="Диана объясняет отсутствие doctor’s appointment.">Диана class-қа келе алмайтынын doctor’s appointment себебімен түсіндіреді.</span></p>
+            </div>
+
+            <div class="answer-item">
+              <strong>2. Which chapters does Diana need to read?</strong>
+              <small data-kk="Диана қандай chapters оқуы керек?" data-ru="Какие главы Диана должна прочитать?">Диана қандай chapters оқуы керек?</small>
+              <p><b>Correct answer: D</b></p>
+              <p><b>Answer:</b> Chapters 17, 19 and 20.</p>
+              <p><b data-kk="Жауап аудармасы:" data-ru="Перевод ответа:">Жауап аудармасы:</b> <span data-kk="17, 19 және 20-тараулар." data-ru="Главы 17, 19 и 20.">17, 19 және 20-тараулар.</span></p>
+              <p><b data-kk="Неге:" data-ru="Почему:">Неге:</b> <span data-kk="Оқытушы chapter 18 емес, 17, 19 және 20 дейді." data-ru="Преподаватель уточняет: не chapter 18, а 17, 19 и 20.">Оқытушы chapter 18 емес, 17, 19 және 20 дейді.</span></p>
+            </div>
+
+            <div class="answer-item">
+              <strong>3. Where will the teacher post the links?</strong>
+              <small data-kk="Оқытушы links-ті қайда жариялайды?" data-ru="Где преподаватель разместит ссылки?">Оқытушы links-ті қайда жариялайды?</small>
+              <p><b>Correct answer: A</b></p>
+              <p><b>Answer:</b> Online in the usual place.</p>
+              <p><b data-kk="Жауап аудармасы:" data-ru="Перевод ответа:">Жауап аудармасы:</b> <span data-kk="Әдеттегі жерде online." data-ru="Онлайн, в обычном месте.">Әдеттегі жерде online.</span></p>
+              <p><b data-kk="Неге:" data-ru="Почему:">Неге:</b> <span data-kk="Оқытушы articles және video links-ті usual place-ке online қоятынын айтады." data-ru="Преподаватель говорит, что articles и video links будут online in the usual place.">Оқытушы articles және video links-ті usual place-ке online қоятынын айтады.</span></p>
+            </div>
+
+            <div class="answer-item">
+              <strong>4. What is the deadline for the work Diana has to do at home?</strong>
+              <small data-kk="Диананың үйде орындайтын жұмысының deadline күні қашан?" data-ru="Какой дедлайн у домашней работы Дианы?">Диананың үйде орындайтын жұмысының deadline күні қашан?</small>
+              <p><b>Correct answer: C</b></p>
+              <p><b>Answer:</b> This Friday.</p>
+              <p><b data-kk="Жауап аудармасы:" data-ru="Перевод ответа:">Жауап аудармасы:</b> <span data-kk="Осы жұма." data-ru="В эту пятницу.">Осы жұма.</span></p>
+              <p><b data-kk="Неге:" data-ru="Почему:">Неге:</b> <span data-kk="Диана deadline сұрағанда, оқытушы this Friday деп жауап береді." data-ru="Когда Диана спрашивает deadline, преподаватель отвечает this Friday.">Диана deadline сұрағанда, оқытушы this Friday деп жауап береді.</span></p>
+            </div>
+
+            <div class="answer-item">
+              <strong>5. Why is the teacher giving a practice test?</strong>
+              <small data-kk="Оқытушы practice test-ті не үшін береді?" data-ru="Зачем преподаватель даёт тренировочный тест?">Оқытушы practice test-ті не үшін береді?</small>
+              <p><b>Correct answer: B</b></p>
+              <p><b>Answer:</b> To help students prepare for the mid-term exam.</p>
+              <p><b data-kk="Жауап аудармасы:" data-ru="Перевод ответа:">Жауап аудармасы:</b> <span data-kk="Студенттерге mid-term exam-ға дайындалуға көмектесу үшін." data-ru="Чтобы помочь студентам подготовиться к mid-term exam.">Студенттерге mid-term exam-ға дайындалуға көмектесу үшін.</span></p>
+              <p><b data-kk="Неге:" data-ru="Почему:">Неге:</b> <span data-kk="Оқытушы practice test mid-term exam-ға дайындалуға көмектеседі дейді." data-ru="Преподаватель говорит, что practice test помогает подготовиться к mid-term exam.">Оқытушы practice test mid-term exam-ға дайындалуға көмектеседі дейді.</span></p>
+            </div>
+
+            <div class="answer-item">
+              <strong>6. How will Diana receive the practice test?</strong>
+              <small data-kk="Диана practice test-ті қалай алады?" data-ru="Как Диана получит тренировочный тест?">Диана practice test-ті қалай алады?</small>
+              <p><b>Correct answer: D</b></p>
+              <p><b>Answer:</b> The teacher will send it by email.</p>
+              <p><b data-kk="Жауап аудармасы:" data-ru="Перевод ответа:">Жауап аудармасы:</b> <span data-kk="Оқытушы оны email арқылы жібереді." data-ru="Преподаватель отправит его по email.">Оқытушы оны email арқылы жібереді.</span></p>
+              <p><b data-kk="Неге:" data-ru="Почему:">Неге:</b> <span data-kk="Оқытушы practice test-ті Wednesday күні email арқылы жібере алатынын айтады." data-ru="Преподаватель говорит, что может отправить practice test по email в Wednesday.">Оқытушы practice test-ті Wednesday күні email арқылы жібере алатынын айтады.</span></p>
+            </div>
+
+            <div class="answer-item">
+              <strong>7. What does the teacher ask Diana to bring to the office?</strong>
+              <small data-kk="Оқытушы Дианадан office-ке не әкелуді сұрайды?" data-ru="Что преподаватель просит Диану принести в офис?">Оқытушы Дианадан office-ке не әкелуді сұрайды?</small>
+              <p><b>Correct answer: A</b></p>
+              <p><b>Answer:</b> A certificate from the doctor.</p>
+              <p><b data-kk="Жауап аудармасы:" data-ru="Перевод ответа:">Жауап аудармасы:</b> <span data-kk="Дәрігерден certificate." data-ru="Справку от врача.">Дәрігерден certificate.</span></p>
+              <p><b data-kk="Неге:" data-ru="Почему:">Неге:</b> <span data-kk="Оқытушы doctor-дан certificate әкелуді ұмытпа дейді." data-ru="Преподаватель просит не забыть принести certificate from the doctor.">Оқытушы doctor-дан certificate әкелуді ұмытпа дейді.</span></p>
+            </div>
+
+            <div class="answer-item">
+              <strong>8. What does Diana first misunderstand about the reading?</strong>
+              <small data-kk="Диана reading туралы алғашында нені қате түсінеді?" data-ru="Что Диана сначала неправильно понимает о чтении?">Диана reading туралы алғашында нені қате түсінеді?</small>
+              <p><b>Correct answer: C</b></p>
+              <p><b>Answer:</b> She thinks she should read chapters 17 to 20.</p>
+              <p><b data-kk="Жауап аудармасы:" data-ru="Перевод ответа:">Жауап аудармасы:</b> <span data-kk="Ол 17-ден 20-ға дейінгі барлық chapters-ты оқу керек деп ойлайды." data-ru="Она думает, что нужно читать все главы с 17 по 20.">Ол 17-ден 20-ға дейінгі барлық chapters-ты оқу керек деп ойлайды.</span></p>
+              <p><b data-kk="Неге:" data-ru="Почему:">Неге:</b> <span data-kk="Оқытушы оны түзетіп, chapter 18-ді қоспау керек екенін айтады." data-ru="Преподаватель исправляет её и говорит, что chapter 18 не входит.">Оқытушы оны түзетіп, chapter 18-ді қоспау керек екенін айтады.</span></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-panel" data-tab-group="audio2" data-tab-name="transcript">
+          <div class="text-box">Student: Excuse me, Ms Henderson?
+Teacher: Yes, Diana. How can I help you?
+Student: I'm sorry, but I can't come to class next Wednesday. I have a doctor's appointment.
+Teacher: OK. Thanks for letting me know.
+Student: Is there anything to do at home?
+Teacher: Let me just check my notebook. OK, first of all … you need to read chapters 17, 19 and 20 in the book. There are also some articles and a video to watch – those are online. I'll post the links online in the usual place.
+Student: Chapters 17 to 20.
+Teacher: Yes, except chapter 18. Chapters 17, 19 and 20.
+Student: Ah, OK. Um ... is there a deadline?
+Teacher: Yes, this Friday. But there's something else. I was going to give you all a practice test.
+Student: A practice test?
+Teacher: Yes, to help people prepare for the mid-term exam.
+Student: Ah. All right.
+Teacher: Don't worry, I can send you the practice test by email on Wednesday. Can you send it to me before Friday?
+Student: Sure, no problem.
+Teacher: And don't forget to bring a certificate from the doctor to the office.
+Student: Thanks, Ms Henderson! I'll do that.
+Teacher: You're welcome, Diana. Take care.</div>
+        </div>
+
+        <div class="tab-panel" data-tab-group="audio2" data-tab-name="translation">
+          <div class="line-translation">
+            <div class="line-item">
+              <strong>Student: Excuse me, Ms Henderson?</strong>
+              <span data-kk="Студент: Кешіріңіз, Хендерсон ханым?" data-ru="Студент: Извините, мисс Хендерсон?">Студент: Кешіріңіз, Хендерсон ханым?</span>
+            </div>
+            <div class="line-item">
+              <strong>Teacher: Yes, Diana. How can I help you?</strong>
+              <span data-kk="Оқытушы: Иә, Диана. Қалай көмектесе аламын?" data-ru="Преподаватель: Да, Диана. Чем я могу помочь?">Оқытушы: Иә, Диана. Қалай көмектесе аламын?</span>
+            </div>
+            <div class="line-item">
+              <strong>Student: I'm sorry, but I can't come to class next Wednesday. I have a doctor's appointment.</strong>
+              <span data-kk="Студент: Кешіріңіз, бірақ келесі сәрсенбіде сабаққа келе алмаймын. Менің дәрігерге жазылған уақытым бар." data-ru="Студент: Извините, но я не смогу прийти на занятие в следующую среду. У меня запись к врачу.">Студент: Кешіріңіз, бірақ келесі сәрсенбіде сабаққа келе алмаймын. Менің дәрігерге жазылған уақытым бар.</span>
+            </div>
+            <div class="line-item">
+              <strong>Teacher: OK. Thanks for letting me know.</strong>
+              <span data-kk="Оқытушы: Жақсы. Маған хабарлағаныңа рақмет." data-ru="Преподаватель: Хорошо. Спасибо, что сообщила.">Оқытушы: Жақсы. Маған хабарлағаныңа рақмет.</span>
+            </div>
+            <div class="line-item">
+              <strong>Student: Is there anything to do at home?</strong>
+              <span data-kk="Студент: Үйде орындайтын бір нәрсе бар ма?" data-ru="Студент: Есть что-нибудь, что нужно сделать дома?">Студент: Үйде орындайтын бір нәрсе бар ма?</span>
+            </div>
+            <div class="line-item">
+              <strong>Teacher: Let me just check my notebook.</strong>
+              <span data-kk="Оқытушы: Қазір дәптерімді қарап алайын." data-ru="Преподаватель: Дай я проверю свой блокнот.">Оқытушы: Қазір дәптерімді қарап алайын.</span>
+            </div>
+            <div class="line-item">
+              <strong>OK, first of all … you need to read chapters 17, 19 and 20 in the book.</strong>
+              <span data-kk="Жақсы, ең алдымен, кітаптан 17, 19 және 20-тарауларды оқуың керек." data-ru="Хорошо, прежде всего тебе нужно прочитать главы 17, 19 и 20 в книге.">Жақсы, ең алдымен, кітаптан 17, 19 және 20-тарауларды оқуың керек.</span>
+            </div>
+            <div class="line-item">
+              <strong>There are also some articles and a video to watch – those are online.</strong>
+              <span data-kk="Сондай-ақ бірнеше мақала және көруге арналған video бар — олар online." data-ru="Также есть несколько статей и видео для просмотра — они онлайн.">Сондай-ақ бірнеше мақала және көруге арналған video бар — олар online.</span>
+            </div>
+            <div class="line-item">
+              <strong>I'll post the links online in the usual place.</strong>
+              <span data-kk="Мен links-ті online, әдеттегі жерге жариялаймын." data-ru="Я размещу ссылки онлайн, в обычном месте.">Мен links-ті online, әдеттегі жерге жариялаймын.</span>
+            </div>
+            <div class="line-item">
+              <strong>Student: Chapters 17 to 20.</strong>
+              <span data-kk="Студент: 17-ден 20-ға дейінгі тараулар." data-ru="Студент: Главы с 17 по 20.">Студент: 17-ден 20-ға дейінгі тараулар.</span>
+            </div>
+            <div class="line-item">
+              <strong>Teacher: Yes, except chapter 18. Chapters 17, 19 and 20.</strong>
+              <span data-kk="Оқытушы: Иә, бірақ 18-тараудан басқа. 17, 19 және 20-тараулар." data-ru="Преподаватель: Да, кроме главы 18. Главы 17, 19 и 20.">Оқытушы: Иә, бірақ 18-тараудан басқа. 17, 19 және 20-тараулар.</span>
+            </div>
+            <div class="line-item">
+              <strong>Student: Ah, OK. Um ... is there a deadline?</strong>
+              <span data-kk="Студент: А, жақсы. Deadline бар ма?" data-ru="Студент: А, хорошо. Есть дедлайн?">Студент: А, жақсы. Deadline бар ма?</span>
+            </div>
+            <div class="line-item">
+              <strong>Teacher: Yes, this Friday. But there's something else.</strong>
+              <span data-kk="Оқытушы: Иә, осы жұма. Бірақ тағы бір нәрсе бар." data-ru="Преподаватель: Да, в эту пятницу. Но есть ещё кое-что.">Оқытушы: Иә, осы жұма. Бірақ тағы бір нәрсе бар.</span>
+            </div>
+            <div class="line-item">
+              <strong>I was going to give you all a practice test.</strong>
+              <span data-kk="Мен барлығыңа practice test берейін деп едім." data-ru="Я собиралась дать вам всем тренировочный тест.">Мен барлығыңа practice test берейін деп едім.</span>
+            </div>
+            <div class="line-item">
+              <strong>Student: A practice test?</strong>
+              <span data-kk="Студент: Practice test пе?" data-ru="Студент: Тренировочный тест?">Студент: Practice test пе?</span>
+            </div>
+            <div class="line-item">
+              <strong>Teacher: Yes, to help people prepare for the mid-term exam.</strong>
+              <span data-kk="Оқытушы: Иә, студенттерге mid-term exam-ға дайындалуға көмектесу үшін." data-ru="Преподаватель: Да, чтобы помочь студентам подготовиться к mid-term exam.">Оқытушы: Иә, студенттерге mid-term exam-ға дайындалуға көмектесу үшін.</span>
+            </div>
+            <div class="line-item">
+              <strong>Student: Ah. All right.</strong>
+              <span data-kk="Студент: А, түсінікті." data-ru="Студент: А, хорошо.">Студент: А, түсінікті.</span>
+            </div>
+            <div class="line-item">
+              <strong>Teacher: Don't worry, I can send you the practice test by email on Wednesday.</strong>
+              <span data-kk="Оқытушы: Уайымдама, мен practice test-ті сәрсенбіде email арқылы жібере аламын." data-ru="Преподаватель: Не волнуйся, я могу отправить тебе тренировочный тест по email в среду.">Оқытушы: Уайымдама, мен practice test-ті сәрсенбіде email арқылы жібере аламын.</span>
+            </div>
+            <div class="line-item">
+              <strong>Can you send it to me before Friday?</strong>
+              <span data-kk="Оны маған жұмаға дейін жібере аласың ба?" data-ru="Можешь отправить его мне до пятницы?">Оны маған жұмаға дейін жібере аласың ба?</span>
+            </div>
+            <div class="line-item">
+              <strong>Student: Sure, no problem.</strong>
+              <span data-kk="Студент: Әрине, мәселе жоқ." data-ru="Студент: Конечно, без проблем.">Студент: Әрине, мәселе жоқ.</span>
+            </div>
+            <div class="line-item">
+              <strong>Teacher: And don't forget to bring a certificate from the doctor to the office.</strong>
+              <span data-kk="Оқытушы: Және doctor-дан certificate алып, office-ке әкелуді ұмытпа." data-ru="Преподаватель: И не забудь принести в офис справку от врача.">Оқытушы: Және doctor-дан certificate алып, office-ке әкелуді ұмытпа.</span>
+            </div>
+            <div class="line-item">
+              <strong>Student: Thanks, Ms Henderson! I'll do that.</strong>
+              <span data-kk="Студент: Рақмет, Хендерсон ханым! Солай істеймін." data-ru="Студент: Спасибо, мисс Хендерсон! Я так и сделаю.">Студент: Рақмет, Хендерсон ханым! Солай істеймін.</span>
+            </div>
+            <div class="line-item">
+              <strong>Teacher: You're welcome, Diana. Take care.</strong>
+              <span data-kk="Оқытушы: Оқасы жоқ, Диана. Өзіңді күт." data-ru="Преподаватель: Пожалуйста, Диана. Береги себя.">Оқытушы: Оқасы жоқ, Диана. Өзіңді күт.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-panel" data-tab-group="audio2" data-tab-name="vocabulary">
+          <ul class="vocab-list">
+            <li><strong>doctor’s appointment</strong> — <span data-kk="дәрігерге жазылған уақыт" data-ru="запись к врачу">дәрігерге жазылған уақыт</span></li>
+            <li><strong>to let someone know</strong> — <span data-kk="біреуге хабарлау" data-ru="сообщить кому-либо">біреуге хабарлау</span></li>
+            <li><strong>chapter</strong> — <span data-kk="тарау" data-ru="глава">тарау</span></li>
+            <li><strong>article</strong> — <span data-kk="мақала" data-ru="статья">мақала</span></li>
+            <li><strong>link</strong> — <span data-kk="сілтеме" data-ru="ссылка">сілтеме</span></li>
+            <li><strong>usual place</strong> — <span data-kk="әдеттегі жер" data-ru="обычное место">әдеттегі жер</span></li>
+            <li><strong>practice test</strong> — <span data-kk="жаттығу тесті" data-ru="тренировочный тест">жаттығу тесті</span></li>
+            <li><strong>mid-term exam</strong> — <span data-kk="аралық емтихан" data-ru="промежуточный экзамен">аралық емтихан</span></li>
+            <li><strong>certificate</strong> — <span data-kk="анықтама" data-ru="справка">анықтама</span></li>
+            <li><strong>take care</strong> — <span data-kk="өзіңді күт" data-ru="береги себя">өзіңді күт</span></li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+  </div>
+
+  <script>
+    let currentLang = "kk";
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+
+      document.querySelectorAll("[data-kk][data-ru]").forEach((element) => {
+        const text = element.getAttribute(`data-${lang}`);
+        if (text !== null) {
+          element.textContent = text;
+        }
+      });
+
+      document.querySelectorAll(".lang-btn").forEach((button) => {
+        button.classList.toggle("active", button.dataset.lang === lang);
+      });
+    }
+
+    document.querySelectorAll(".lang-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        setLanguage(button.dataset.lang);
+      });
+    });
+
+    function openTab(group, tabName) {
+      document.querySelectorAll(`[data-tab-group="${group}"]`).forEach((panel) => {
+        panel.classList.toggle("active", panel.dataset.tabName === tabName);
+      });
+
+      const listeningCard = document.getElementById(group.replace("audio", "audio-"));
+
+      if (listeningCard) {
+        listeningCard.querySelectorAll(".tab-btn").forEach((button) => {
+          const onclick = button.getAttribute("onclick") || "";
+          button.classList.toggle("active", onclick.includes(`'${tabName}'`));
+        });
+      }
+
+      setLanguage(currentLang);
+    }
+
+    function checkTest(testId) {
+      const testArea = document.querySelector(`[data-test="${testId}"]`);
+      const questions = testArea.querySelectorAll(".question");
+      const resultBox = document.getElementById(`result-${testId}`);
+      const answerPanel = document.getElementById(`answers-${testId}`);
+
+      let score = 0;
+
+      questions.forEach((question) => {
+        const correctAnswer = question.dataset.correct;
+        const selected = question.querySelector("input[type='radio']:checked");
+
+        question.querySelectorAll(".option").forEach((option) => {
+          option.classList.remove("correct", "wrong");
+
+          const input = option.querySelector("input");
+
+          if (input.value === correctAnswer) {
+            option.classList.add("correct");
+          }
+
+          if (selected && input.checked && input.value !== correctAnswer) {
+            option.classList.add("wrong");
+          }
+        });
+
+        if (selected && selected.value === correctAnswer) {
+          score++;
+        }
+      });
+
+      const total = questions.length;
+
+      if (currentLang === "kk") {
+        resultBox.textContent = `Сіздің нәтижеңіз: ${score} / ${total}`;
+      } else {
+        resultBox.textContent = `Ваш результат: ${score} / ${total}`;
+      }
+
+      resultBox.style.display = "inline-flex";
+
+      if (answerPanel) {
+        answerPanel.style.display = "block";
+      }
+
+      setLanguage(currentLang);
+    }
+
+    setLanguage("kk");
+  </script>
+  
