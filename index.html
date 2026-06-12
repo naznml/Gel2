@@ -4838,5 +4838,103 @@ Hawking's research focused on the properties of black holes and the origins of t
 
     setLanguage("kk");
   </script>
+    <script>
+    let currentLang = "kk";
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+
+      document.querySelectorAll("[data-kk][data-ru]").forEach((element) => {
+        const text = element.getAttribute(`data-${lang}`);
+        if (text !== null) {
+          element.textContent = text;
+        }
+      });
+
+      document.querySelectorAll(".lang-btn").forEach((button) => {
+        button.classList.toggle("active", button.dataset.lang === lang);
+      });
+    }
+
+    document.querySelectorAll(".lang-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        setLanguage(button.dataset.lang);
+      });
+    });
+
+    function openTab(group, tabName) {
+      document.querySelectorAll(`[data-tab-group="${group}"]`).forEach((panel) => {
+        panel.classList.toggle("active", panel.dataset.tabName === tabName);
+      });
+
+      const listeningCard = document.getElementById(group.replace("audio", "audio-"));
+
+      if (listeningCard) {
+        listeningCard.querySelectorAll(".tab-btn").forEach((button) => {
+          const onclick = button.getAttribute("onclick") || "";
+          button.classList.toggle("active", onclick.includes(`'${tabName}'`));
+        });
+      }
+
+      setLanguage(currentLang);
+    }
+
+    function checkTest(testId) {
+      const testArea = document.querySelector(`[data-test="${testId}"]`);
+      if (!testArea) return;
+
+      const questions = testArea.querySelectorAll(".question");
+      const resultBox = document.getElementById(`result-${testId}`);
+      const answerPanel = document.getElementById(`answers-${testId}`);
+
+      let score = 0;
+
+      questions.forEach((question) => {
+        const correctAnswer = question.dataset.correct;
+        const selected = question.querySelector("input[type='radio']:checked");
+
+        question.querySelectorAll(".option").forEach((option) => {
+          option.classList.remove("correct", "wrong");
+
+          const input = option.querySelector("input");
+
+          if (input && input.value === correctAnswer) {
+            option.classList.add("correct");
+          }
+
+          if (selected && input && input.checked && input.value !== correctAnswer) {
+            option.classList.add("wrong");
+          }
+        });
+
+        if (selected && selected.value === correctAnswer) {
+          score++;
+        }
+      });
+
+      const total = questions.length;
+
+      if (resultBox) {
+        if (currentLang === "kk") {
+          resultBox.textContent = `Сіздің нәтижеңіз: ${score} / ${total}`;
+        } else {
+          resultBox.textContent = `Ваш результат: ${score} / ${total}`;
+        }
+
+        resultBox.style.display = "inline-flex";
+      }
+
+      if (answerPanel) {
+        answerPanel.style.display = "block";
+      }
+
+      setLanguage(currentLang);
+    }
+
+    setLanguage("kk");
+  </script>
+</body>
+</html>
 </body>
 </html>
